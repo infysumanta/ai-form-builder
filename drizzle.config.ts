@@ -5,7 +5,7 @@ const connectionString =
   "postgres://postgres:postgres@localhost:5432/ai-form-builder";
 
 export default {
-  schema: "./src/db/schema.ts",
+  schema: "./src/db/schema",
   out: "./src/db/migrations",
   driver: "pg",
   dbCredentials: {
