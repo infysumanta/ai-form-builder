@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <SessionProvider>
       <Header />
-      <main className="flex min-h-screen flex-col items-center">
+      <main className="flex  flex-col items-center">
         <LandingPage />
       </main>
     </SessionProvider>
