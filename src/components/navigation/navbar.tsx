@@ -7,18 +7,33 @@ import { SidebarNavItem } from "@/types/types";
 import { cn } from "@/lib/utils";
 import { Icons } from "../icons";
 
-interface DashboardNavProps {
-  items: SidebarNavItem[];
-}
+const sidebarNav: SidebarNavItem[] = [
+  {
+    title: "My Forms",
+    href: "/view-forms",
+    icon: "library",
+  },
+  {
+    title: "Results",
+    href: "/results",
+    icon: "list",
+  },
 
-const DashboardNav = ({ items }: DashboardNavProps) => {
+  {
+    title: "Settings",
+    href: "/settings",
+    icon: "settings",
+  },
+];
+
+const DashboardNav = () => {
   const path = usePathname();
 
-  if (!items?.length) return null;
+  if (!sidebarNav?.length) return null;
 
   return (
-    <nav>
-      {items.map((item, index) => {
+    <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+      {sidebarNav.map((item, index) => {
         const Icon = Icons[(item?.icon as keyof typeof Icons) || "list"];
         const isActive = path === item.href;
         return (
@@ -26,8 +41,8 @@ const DashboardNav = ({ items }: DashboardNavProps) => {
             <Link key={index} href={item.disabled ? "/" : item.href}>
               <span
                 className={cn(
-                  "group flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground",
-                  isActive ? "bg-accent" : "transparent",
+                  "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                  isActive ? "bg-muted text-primary" : "text-muted-foreground",
                   item.disabled
                     ? "cursor-not-allowed opacity-80"
                     : "cursor-pointer",

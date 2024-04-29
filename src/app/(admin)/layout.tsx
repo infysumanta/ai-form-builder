@@ -1,53 +1,35 @@
-import DashboardNav from "@/components/navigation/navbar";
-import { SessionProvider } from "next-auth/react";
-import FormGenerator from "../form-generator";
-import UpdgradeAccBtn from "@/components/navigation/updgradeAccBtn";
-import { SidebarNavItem } from "@/types/types";
-import Header from "@/components/ui/header";
+import SidebarLayout from "@/components/dashboard/sidebar";
+import HeaderLayout from "@/components/dashboard/header";
+import { Button } from "@/components/ui/button";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const dashboardConfig: {
-    sidebarNav: SidebarNavItem[];
-  } = {
-    sidebarNav: [
-      {
-        title: "My Forms",
-        href: "/view-forms",
-        icon: "library",
-      },
-      {
-        title: "Results",
-        href: "/results",
-        icon: "list",
-      },
-
-      {
-        title: "Settings",
-        href: "/settings",
-        icon: "settings",
-      },
-    ],
-  };
   return (
-    <div className="flex min-h-screen flex-col space-y-6">
-      <Header />
-      <div className="container grid gap-12 md:grid-cols-[200px_1fr] flex-1">
-        <aside className="hidden w-[200px] flex-col md:flex pr-2 border-r justify-between">
-          <DashboardNav items={dashboardConfig.sidebarNav} />
-          <UpdgradeAccBtn />
-        </aside>
-        <main className="flex w-full flex-1 flex-col overflow-hidden">
-          <header className="flex items-center">
-            <h1 className="text-4xl m-5 p-4 font-semibold">Dashboard</h1>
-            <SessionProvider>
-              <FormGenerator />
-            </SessionProvider>
-          </header>
-          <hr className="my-4" />
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <SidebarLayout />
+      <div className="flex flex-col">
+        <HeaderLayout />
+        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <div className="flex items-center">
+            <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
+          </div>
+          <div
+            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
+            x-chunk="dashboard-02-chunk-1"
+          >
+            <div className="flex flex-col items-center gap-1 text-center">
+              <h3 className="text-2xl font-bold tracking-tight">
+                You have no products
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                You can start selling as soon as you add a product.
+              </p>
+              <Button className="mt-4">Add Product</Button>
+            </div>
+          </div>
           {children}
         </main>
       </div>
